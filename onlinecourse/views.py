@@ -74,7 +74,7 @@ class CourseListView(generic.ListView):
 
 class CourseDetailView(generic.DetailView):
     model = Course
-    template_name = 'onlinecourse/course_detail_bootstrap.html'
+    template_name = 'onlinecourse/course_details_bootstrap.html'
 
 
 def enroll(request, course_id):
@@ -118,7 +118,7 @@ def submit(request, course_id):
     )
     submission.choices.set(selected_choices)
     return redirect(
-        'onlinecourse:exam_result',
+        'onlinecourse:show_exam_result',
         course_id=course.id,
         submission_id=submission.id,
     )
@@ -148,5 +148,6 @@ def show_exam_result(request, course_id, submission_id):
             'course': course,
             'grade': grade,
             'choices': choices,
+            'selected_ids': selected_ids,
         },
     )

@@ -103,6 +103,10 @@ class Question(models.Model):
     def __str__(self):
         return "Question: " + self.content
 
+    @property
+    def question_text(self):
+        return self.content
+
     def is_get_score(self, selected_ids):
         correct_ids = set(
             self.choice_set.filter(is_correct=True).values_list('id', flat=True)
@@ -122,3 +126,6 @@ class Choice(models.Model):
 class Submission(models.Model):
     enrollment = models.ForeignKey(Enrollment, on_delete=models.CASCADE)
     choices = models.ManyToManyField(Choice)
+
+    def __str__(self):
+        return f"Submission {self.id} by {self.enrollment.user.username}"

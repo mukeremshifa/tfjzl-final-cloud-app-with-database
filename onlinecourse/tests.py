@@ -56,5 +56,6 @@ class ExamFlowTests(TestCase):
         result = self.client.get(response.url)
         self.assertContains(result, 'Congratulations')
         self.assertContains(result, 'score 100/100')
+        self.assertContains(result, 'Correct answer: Yes')
 
 # Create your tests here.
